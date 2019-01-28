@@ -11,6 +11,8 @@ gem 'rails', '~> 5.1.6', '>= 5.1.6.1'
 gem 'bcrypt',         '3.1.12'
 gem 'bootstrap-sass', '3.3.7'
 gem 'rails-controller-testing'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
@@ -43,6 +45,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'rspec-rails'
+  gem "factory_bot_rails"
 end
 
 group :development do
