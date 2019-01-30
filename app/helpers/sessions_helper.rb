@@ -11,6 +11,10 @@ module SessionsHelper
     end
   end
 
+  def correct_user?(user)
+    user == current_user
+  end
+
   # ユーザーがログインしていればtrue、その他ならfalseを返す
   def logged_in?
     !current_user.nil?
@@ -49,6 +53,15 @@ module SessionsHelper
     cookies.delete(:remember_token)
   end
 
+  # 記載したURLにリダイレクト
+  def redirect_back_or(default)
+    redirect_to(session[:forwarding_url] || default)
+    session.delete(:forwarding_url)
+  end
 
+  # アクセスしようとしたURLを記憶しておく
+  def store_location
+    session[:forwarding_url] = request.original_url if request.get?
+  end
 
 end
