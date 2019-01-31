@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe "UserEdits", type: :request do
   describe "GET /user_edits" do
     before do
-      debugger
       @user = FactoryBot.create(:user)
       @other_user = FactoryBot.create(:user,name:"test",email:"duchess@example.gov")
     end
