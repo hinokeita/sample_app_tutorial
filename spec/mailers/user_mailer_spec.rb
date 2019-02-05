@@ -22,18 +22,19 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 
-  # describe "password_reset" do
-  #   let(:mail) { UserMailer.password_reset }
-  #
-  #   it "renders the headers" do
-  #     expect(mail.subject).to eq("Password reset")
-  #     expect(mail.to).to eq(["to@example.org"])
-  #     expect(mail.from).to eq(["noreply@example.com"])
-  #   end
-  #
-  #   it "renders the body" do
-  #     expect(mail.body.encoded).to match("Hi")
-  #   end
-  # end
+
+  describe "password_reset" do
+    it "renders the headers" do
+      user = FactoryBot.create(:user)
+      user.reset_token = User.new_token
+      mail = UserMailer.password_reset(user)
+      assert_equal "Password reset", mail.subject
+      assert_equal [user.email], mail.to
+      assert_equal ["noreply@example.com"], mail.from
+      assert_match user.reset_token,        mail.body.encoded
+      assert_match CGI.escape(user.email),  mail.body.encoded
+    end
+
+  end
 
 end
