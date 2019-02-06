@@ -11,7 +11,7 @@ module SessionsHelper
     end
   end
 
-  def correct_user?(user)
+  def current_user?(user)
     user == current_user
   end
 
