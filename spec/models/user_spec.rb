@@ -94,4 +94,16 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'association' do
+    it 'micropost destroy' do
+      micropost = FactoryBot.create(:micropost)
+      micropost.user_id = user.id
+      user.save
+      user.microposts.create!(content: "Lorem ipsum")
+      user.destroy
+      expect{ user.destroy }.to change {Micropost.count}.by(Micropost.count - 1)
+    end
+  end
+
 end
